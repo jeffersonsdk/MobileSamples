@@ -13,7 +13,7 @@ import pro.jefferson.sdk.Jefferson;
 public class JeffersonSDKModule extends ReactContextBaseJavaModule {
 
     Context c;
-
+    public Jefferson j;
     public JeffersonSDKModule(ReactApplicationContext context) {
         super(context);
         this.c = context;
@@ -27,7 +27,11 @@ public class JeffersonSDKModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public Jefferson start() {
-        return new Jefferson(c).setServer().watchThread();
-
+        j= new Jefferson(c).setServer().watchThread();
+        return j;
+    }
+    @ReactMethod
+    public void sendEvent(String s){
+        j.getServer().send(s);
     }
 }

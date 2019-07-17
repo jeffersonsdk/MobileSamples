@@ -6,29 +6,34 @@
  * @flow
  */
 
-import React, { Fragment,Component } from 'react';
+import React, { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
-  NativeModules
+  NativeModules,
+  TouchableOpacity
 } from 'react-native';
 
-
-
-export default class App extends Component {
-  componentDidMount(){
 const jeff = NativeModules.JeffersonSDK
 
-jeff.start()
+export default class App extends Component {
+  constructor(props){
+    super(props);
+
   }
+
+  componentDidMount(){
+    jeff.start()
+  //jeff.sendEvent("event_one");
+  }
+
   render() {
     return (
-      <View >
- 
+      <View style={{alignContent:'center'}}>
+        <Text>JEFFERSON SDK</Text>
+        <TouchableOpacity style={{backgroundColor:'blue'}} onPress={()=>jeff.sendEvent("event_one")}>
+          <Text>Send Event</Text>
+        </TouchableOpacity>
       </View>
     );
   }
